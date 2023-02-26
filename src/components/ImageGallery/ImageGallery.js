@@ -12,7 +12,6 @@ class ImageGallery extends Component {
   async componentDidUpdate(prevProps, prevState) {
     const lastName = prevProps.pictureName;
     const newName = this.props.pictureName;
-    const nextPage = prevState.page + 1;
     if (lastName !== newName) {
       try {
         const API = `https://pixabay.com/api/?q=${newName}&page=1&key=32407272-8586469b42e966f16f1a46a56&image_type=photo&orientation=horizontal&per_page=12&page=${this.state.page}`;
@@ -29,16 +28,12 @@ class ImageGallery extends Component {
             largeImageURL,
           })),
           totalPages: totalPages,
-          page: nextPage,
         });
       } catch (error) {
         console.log(error);
       }
     }
   }
-  handleSubmit = async () => {
-    this.setState({ page: this.state.page + 1 });
-  };
 
   render() {
     const { pictures } = this.state;
@@ -53,7 +48,7 @@ class ImageGallery extends Component {
             />
           ))}
         </ImageList>
-        <Button onClick={this.handleSubmit} />
+        <Button />
       </Container>
     );
   }
