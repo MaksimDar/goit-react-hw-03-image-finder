@@ -2,7 +2,7 @@ import React from 'react';
 import { Component } from 'react';
 import SearchBar from './SearchBar/SearchBar';
 import ImageGallery from 'components/ImageGallery/ImageGallery';
-
+import
 import { fetchImages } from './searchByAPI/API';
 
 class App extends Component {
