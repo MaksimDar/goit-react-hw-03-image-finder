@@ -11,14 +11,12 @@ class SearchBar extends Component {
     this.setState({ pictureName: input.toLowerCase() });
   };
   handleSubmit = event => {
-    const { pictureName } = this.state;
-    const { onSubmit } = this.props;
     event.preventDefault();
-    if (pictureName === '') {
+    if (this.state.pictureName === '') {
       alert('You should write your request');
       return;
     }
-    onSubmit(pictureName);
+    this.props.onSubmit(this.state.pictureName);
     this.setState({ pictureName: '' });
   };
 
@@ -35,6 +33,7 @@ class SearchBar extends Component {
             autoComplete="off"
             autoFocus
             placeholder="Search images and photos"
+            value={this.state.pictureName}
             onChange={this.handleChange}
           />
         </Form>
