@@ -3,21 +3,21 @@ import { Form, SearchButton } from './SearchBar.styled';
 
 class SearchBar extends Component {
   state = {
-    pictureName: '',
+    query: '',
   };
 
   handleChange = event => {
     const input = event.currentTarget.value;
-    this.setState({ pictureName: input.toLowerCase() });
+    this.setState({ query: input.toLowerCase() });
   };
   handleSubmit = event => {
     event.preventDefault();
-    if (this.state.pictureName === '') {
+    if (this.state.query === '') {
       alert('You should write your request');
       return;
     }
-    this.props.onSubmit(this.state.pictureName);
-    this.setState({ pictureName: '' });
+    this.props.onSubmit(this.state.query);
+    this.setState({ query: '' });
   };
 
   render() {
@@ -33,7 +33,7 @@ class SearchBar extends Component {
             autoComplete="off"
             autoFocus
             placeholder="Search images and photos"
-            value={this.state.pictureName}
+            value={this.state.query}
             onChange={this.handleChange}
           />
         </Form>

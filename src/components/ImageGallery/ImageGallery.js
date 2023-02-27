@@ -1,5 +1,4 @@
 import ImageGalleryItem from '../ImageGalleryItem/ImageGalleryItem';
-
 import { ImageList, Container } from './ImageGallery.styled';
 
 const ImageGallery = ({ pictures }) => {
