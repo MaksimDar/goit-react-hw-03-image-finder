@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
-import css from './App.module.css';
 import Searchbar from '../Searchbar';
 import ImageGallery from '../ImageGallery';
 import Modal from '../Modal';
@@ -29,7 +27,7 @@ export class App extends Component {
     const { query, largeImageURL } = this.state;
 
     return (
-      <div className={css.App}>
+      <div>
         <Searchbar onSubmit={this.onSubmit} />
         {query && (
           <ImageGallery query={query} onImageClick={this.handleImageClick} />
