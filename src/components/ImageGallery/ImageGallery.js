@@ -105,7 +105,7 @@ class ImageGallery extends Component {
     return;
   }
 
-  handleBattonClick = () => {
+  handleButtonClick = () => {
     if (this.state.totalPages === this.state.page) {
       toast.info('There is no more images');
       return;
@@ -138,7 +138,7 @@ class ImageGallery extends Component {
           ))}
         </ImageGalleryList>
         {isLoading && <Loader />}
-        {totalPages > 1 && <Button onClick={this.handleBattonClick} />}
+        {totalPages > 1 && <Button onClick={this.handleButtonClick} />}
       </>
     );
   }
