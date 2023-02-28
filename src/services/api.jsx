@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const BASE_URL = 'https://pixabay.com/api/';
-const API_KEY = '32407272-8586469b42e966f16f1a46a56';
+const KEY = '32407272-8586469b42e966f16f1a46a56';
 
 const instance = axios.create({
   baseURL: BASE_URL,
@@ -10,7 +10,7 @@ const instance = axios.create({
 export const getPhotos = async (q, page) => {
   const config = {
     params: {
-      key: API_KEY,
+      key: KEY,
       image_type: 'photo',
       q,
       page,
