@@ -1,7 +1,8 @@
-/* html {
+html {
   box-sizing: border-box;
   width: 100vw;
   overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 *,
@@ -20,26 +21,32 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-img {
-  display: block;
+.image {
+  /* display: block;
   max-width: 100%;
-  height: auto;
-} */
+  height: auto; */
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+}
 
 /*
  * Стили компонента App
  */
-/* .App {
+.App {
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 16px;
   padding-bottom: 24px;
-} */
+}
 
 /*
  * Стили компонента Searchbar
  */
-/* .Searchbar {
+.Searchbar {
   top: 0;
   left: 0;
   position: sticky;
@@ -56,12 +63,12 @@ img {
   background-color: #3f51b5;
   box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
     0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
-} */
+}
 
 /*
  * Стили компонента SearchForm
  */
-/* .SearchForm {
+.SearchForm {
   display: flex;
   align-items: center;
   width: 100%;
@@ -69,14 +76,15 @@ img {
   background-color: #fff;
   border-radius: 3px;
   overflow: hidden;
-} */
+}
 
-/* .SearchForm-button {
+.SearchFormButton {
+  position: relative;
   display: inline-block;
   width: 48px;
   height: 48px;
   border: 0;
-  background-image: url('https://image.flaticon.com/icons/svg/149/149852.svg');
+  /* background-image: url('https://image.flaticon.com/icons/svg/149/149852.svg'); */
   background-size: 40%;
   background-repeat: no-repeat;
   background-position: center;
@@ -84,13 +92,28 @@ img {
   transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
   outline: none;
-} */
+}
 
-/* .SearchForm-button:hover {
+.SearchFormButton:hover {
   opacity: 1;
-} */
-/* 
-.SearchForm-input {
+}
+
+.SearchFormButtonLabel {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  overflow: hidden;
+  /* clip: rect(0, 0, 0, 0); */
+  white-space: nowrap;
+  /* clip-path: inset(50%); */
+  border: 0;
+}
+
+.SearchFormInput {
   display: inline-block;
   width: 100%;
   font: inherit;
@@ -101,37 +124,37 @@ img {
   padding-right: 4px;
 }
 
-.SearchForm-input::placeholder {
+.SearchFormInput::placeholder {
   font: inherit;
   font-size: 18px;
-} */
+}
 
 /*
  * Стили компонента ImageGallery
  */
-/* .ImageGallery {
+.ImageGallery {
   display: grid;
   max-width: calc(100vw - 48px);
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   grid-gap: 16px;
-  margin-top: 0;
+  margin-top: 20px;
   margin-bottom: 0;
   padding: 0;
   list-style: none;
   margin-left: auto;
   margin-right: auto;
-} */
+}
 
 /*
  * Стили компонента ImageGalleryItem
  */
-/* .ImageGalleryItem {
+.ImageGalleryItem {
   border-radius: 2px;
   box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
     0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
-} */
+}
 
-/* .ImageGalleryItem-image {
+.ImageGalleryItem-image {
   width: 100%;
   height: 260px;
   object-fit: cover;
@@ -141,13 +164,13 @@ img {
 .ImageGalleryItem-image:hover {
   transform: scale(1.03);
   cursor: zoom-in;
-} */
+}
 
 /*
  * Стили компонента Modal
  */
 
-/* .Overlay {
+.Overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -158,23 +181,30 @@ img {
   align-items: center;
   background-color: rgba(0, 0, 0, 0.8);
   z-index: 1200;
+  cursor: pointer;
 }
 
 .Modal {
   max-width: calc(100vw - 48px);
   max-height: calc(100vh - 24px);
-} */
+  cursor: auto;
+}
 
 /*
 * Стили компонента Buton (Load more)
 */
 .Button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
   padding: 8px 16px;
   border-radius: 2px;
+  margin-top: 25px;
+  margin-bottom: 25px;
   background-color: #3f51b5;
   transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  text-align: center;
-  display: inline-block;
   color: #fff;
   border: 0;
   text-decoration: none;
@@ -192,4 +222,13 @@ img {
 .Button:hover,
 .Button:focus {
   background-color: #303f9f;
+}
+
+.Loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10;
+  margin-left: auto;
+  margin-right: auto;
 }
