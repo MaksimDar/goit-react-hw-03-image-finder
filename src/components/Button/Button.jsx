@@ -1,23 +1,18 @@
-import { PropTypes } from 'prop-types';
-import {ButtonStyle } from './Button.styled';
+import React from 'react';
+import PropTypes from 'prop-types';
 
+import { ButtonLoadMore } from './Button.styled';
 
-const Button = ({  onClick, }) => (
-	<ButtonStyle type="button" onClick={onClick} >
-		 Завантажити ще...
-	</ButtonStyle>
-);
-
-Button.defaultProps = {
-	onClick: () => null,
-	children: null,
-}
-
-Button.propType = {
-	onClick: PropTypes.func,
-	children: PropTypes.node,
-
-}
+const Button = ({ onClick }) => {
+  return (
+    <ButtonLoadMore type="button" onClick={onClick}>
+      Load more
+    </ButtonLoadMore>
+  );
+};
 
 export default Button;
 
+Button.propTypes = {
+  onClick: PropTypes.func,
+};

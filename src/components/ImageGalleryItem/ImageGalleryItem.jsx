@@ -1,23 +1,25 @@
-import {
-	ImageGalleryItemStyle,
-	ImageGalleryImageStyle,
-} from './ImageGalleryItem.styled';
-import { PropTypes } from 'prop-types';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-const ImageGalleryItem = ({ image: { webformatURL, tags, id }, onClick }) => {
-	return (
-		<ImageGalleryItemStyle onClick={onClick} data-id={id}>
-			<ImageGalleryImageStyle src={webformatURL} alt={tags} />
-		</ImageGalleryItemStyle>
-	);
-};
+import { ImageItem, Image } from './ImageGalleryItem.styled';
 
-ImageGalleryItem.propTypes = {
-  webformatURL: PropTypes.string,
-  tags: PropTypes.array,
-  id: PropTypes.number,
-  onClick: PropTypes.func.isRequired,
+const ImageGalleryItem = ({ image, id, onImageClick, alt }) => {
+  const handleClick = e => {
+    onImageClick(e.currentTarget.id);
+  };
+
+  return (
+    <ImageItem>
+      <Image src={image} alt={alt} onClick={handleClick} id={id} />
+    </ImageItem>
+  );
 };
 
 export default ImageGalleryItem;
 
+ImageGalleryItem.propTypes = {
+  image: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+  onImageClick: PropTypes.func.isRequired,
+  alt: PropTypes.string.isRequired,
+};

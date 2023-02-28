@@ -1,118 +1,57 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { AppContainer } from './App.styled';
-import { Notify } from '../../components/ImageGallery/ImageGallery.styled';
-import Searchbar from 'components/Searchbar';
-import ImageGallery from 'components/ImageGallery';
 
-import Button from 'components/Button';
-import Modal from 'components/Modal';
-import ImageErrorView from 'components/ImageErrorView';
-import Loader from 'components/Loader';
-import imagesAPI from '../../services/images-api';
+import css from './App.module.css';
+import Searchbar from '../Searchbar';
+import ImageGallery from '../ImageGallery';
+import Modal from '../Modal';
 
 export class App extends Component {
   state = {
-    images: [],
-    id: null,
-    searchQuery: '',
-    page: 1,
-    isLoading: false,
-    loadMore: false,
-    showModal: false,
-    isEmpty: false,
-    error: null,
-    per_page: 12,
+    query: '',
+    largeImageURL: '',
   };
 
-  componentDidUpdate(_, prevState) {
-    const { searchQuery, page } = this.state;
-    if (prevState.searchQuery !== searchQuery || prevState.page !== page) {
-      this.getPhotos(searchQuery, page);
-    }
-  }
-
-  getPhotos = async (query, page) => {
-    if (!query) return;
-    this.setState({ isLoading: true });
-    try {
-      const { hits, totalHits } = await imagesAPI(query, page);
-      console.log(hits, totalHits);
-      if (hits.length === 0) {
-        this.setState({ isEmpty: true });
-      }
-      this.setState(prevState => ({
-        images: [...prevState.images, ...hits],
-        loadMore: this.state.page < Math.ceil(totalHits / this.state.per_page),
-      }));
-    } catch (error) {
-      this.setState({ error: error.message });
-    } finally {
-      this.setState({ isLoading: false });
-    }
+  onSubmit = newQuery => {
+    this.setState({ query: newQuery });
   };
 
-  handleFormSubmit = searchQuery => {
-    this.setState({
-      searchQuery: searchQuery,
-      page: 1,
-      loadMore: false,
-      images: [],
-      isEmpty: false,
-    });
+  handleImageClick = image => {
+    this.setState({ largeImageURL: image });
   };
 
-  loadMore = () => {
-    this.setState(prevState => ({ page: prevState.page + 1 }));
-  };
-
-  openModal = e => {
-    this.setState({
-      showModal: true,
-      id: e.currentTarget.dataset.id,
-    });
-  };
-
-  closeModal = e => {
-    this.setState({
-      showModal: false,
-    });
+  closeModal = () => {
+    this.setState({ largeImageURL: '' });
   };
 
   render() {
-    const {
-      searchQuery,
-      page,
-      loadMore,
-      showModal,
-      images,
-      id,
-      isLoading,
-      isEmpty,
-    } = this.state;
+    const { query, largeImageURL } = this.state;
+
     return (
-      <AppContainer>
-        <Searchbar onSubmit={this.handleFormSubmit} />
-        <ToastContainer position="top-center" autoClose={3000} />
-
-        {isLoading && <Loader />}
-        {isEmpty && (
-          <ImageErrorView
-            message={`Немає картинки з ім'ям '${this.state.searchQuery}'`}
-          />
+      <div className={css.App}>
+        <Searchbar onSubmit={this.onSubmit} />
+        {query && (
+          <ImageGallery query={query} onImageClick={this.handleImageClick} />
         )}
-        {searchQuery ? (
-          <ImageGallery openModal={this.openModal} images={images} />
-        ) : (
-          <Notify>Введіть слово в пошуковий рядочок</Notify>
+        {largeImageURL && (
+          <Modal closeModal={this.closeModal}>
+            <img src={largeImageURL} alt="XXX" />
+          </Modal>
         )}
-
-        {loadMore && <Button onClick={this.loadMore} page={page} />}
-        {showModal && (
-          <Modal images={images} id={Number(id)} onClose={this.closeModal} />
-        )}
-      </AppContainer>
+        <ToastContainer
+          position="top-center"
+          autoClose={1000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
+      </div>
     );
   }
 }
