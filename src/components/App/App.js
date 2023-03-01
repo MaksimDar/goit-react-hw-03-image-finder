@@ -37,6 +37,7 @@ export class App extends Component {
             <img src={largeImageURL} alt="XXX" />
           </Modal>
         )}
+
         <ToastContainer
           position="top-center"
           autoClose={1000}
