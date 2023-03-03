@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { createPortal } from 'react-dom';
-import { Overlay } from './Modal.styled';
+import { Overlay, LargeImage } from './Modal.styled';
 import PropTypes from 'prop-types';
 
 const modalRoot = document.getElementById('modal-root');
@@ -24,13 +24,14 @@ class Modal extends Component {
     if (e.currentTarget === e.target) {
       this.props.closeModal();
     }
+    return;
   };
 
   render() {
-    // const { children } = this.props;
+    const { children } = this.props;
     return createPortal(
       <Overlay onClick={this.handleOverlayClick}>
-        <img src={this.props.largeImageURL} alt="XXX" />
+        <LargeImage>{children}</LargeImage>
       </Overlay>,
       modalRoot
     );

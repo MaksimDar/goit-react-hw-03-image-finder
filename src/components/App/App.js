@@ -32,7 +32,11 @@ export class App extends Component {
         {query && (
           <ImageGallery query={query} onImageClick={this.handleImageClick} />
         )}
-        {largeImageURL && <Modal closeModal={this.closeModal} />}
+        {largeImageURL && (
+          <Modal closeModal={this.closeModal}>
+            <img src={largeImageURL} alt="XXX" />
+          </Modal>
+        )}
 
         <ToastContainer
           position="top-center"
